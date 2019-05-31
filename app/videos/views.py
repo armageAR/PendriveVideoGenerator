@@ -51,3 +51,10 @@ def video_delete_view(request, id):
         "object": obj
     }
     return render(request, "videos/delete.html", context)
+
+def video_detail_view(request, id):
+    obj = get_object_or_404(Video, id=id)
+    context = {
+        "object": obj
+    }
+    return render(request, "videos/details.html", context)
