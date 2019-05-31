@@ -1,4 +1,5 @@
 from django.db import models
+import os
 
 
 class Category(models.Model):
@@ -18,3 +19,6 @@ class Video (models.Model):
     videoFile = models.FileField(upload_to='videoFiles/')
     created_at = models.DateTimeField(auto_now=True)
     updated_at = models.DateTimeField(auto_now_add=True)
+
+    def filename(self):
+        return os.path.basename(self.videoFile.name)
