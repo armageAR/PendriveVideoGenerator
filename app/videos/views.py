@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Video
 from .forms import VideoForm
 
@@ -21,5 +21,23 @@ def video_create_view(request):
     else:
         form = VideoForm()
 
+    context = {'form': form}
+    return render(request, template, context)
+
+
+def video_update_view(request, id=id):
+    template = "videos/create.html"
+    obj = get_object_or_404(Video, id=id)
+
+    if request.method == 'POST':
+        form = VideoForm(request.POST, request.FILES, instance=obj)
+        if form.is_valid():
+            form.save()
+            return redirect('video-list')
+        else:
+            # form invalid
+            return redirect('video-list')
+    else:
+        form = VideoForm(None, instance=obj)
     context = {'form': form}
     return render(request, template, context)
