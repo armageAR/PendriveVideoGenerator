@@ -1,9 +1,7 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Videos list</h1>
-<a href="{% url 'video-create' %}" class="btn btn-danger m-1 float-right"
-  >Nuevo Video</a
->
+<h1>Lista de Videos</h1>
+<a href="{% url 'video-create' %}" class="btn btn-danger m-1 float-right"><i class="fas fa-video"></i> Nuevo Video</a>
 <div class="table-responsive">
   <table class="table">
     <thead>
@@ -12,7 +10,7 @@
         <th scope="col">Titulo</th>
         <th scope="col">Categoria</th>
         <th scope="col">Archivo</th>
-        <th scope="col">Reigstrado</th>
+        <th scope="col">Registrado</th>
         <th scope="col">Acciones</th>
       </tr>
     </thead>
@@ -24,7 +22,11 @@
         <td>{{ obj.category }}</td>
         <td>{{ obj.videoFile }}</td>
         <td>{{ obj.created_at }}</td>
-        <td><a href="{% url 'video-update' obj.id %}">M</a> B V</td>
+        <td>
+          <a href="{% url 'video-update' obj.id %}"><i class="fas fa-pen"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;
+          <a href="#"><i class="fas fa-eye"></i></a>
+        </td>
       </tr>
       {% endfor %}
     </tbody>
