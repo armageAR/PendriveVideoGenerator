@@ -18,21 +18,21 @@
       </tr>
     </thead>
     <tbody>
-      {% for obj in object_list %}
+      {% for video in video_list %}
       <tr>
-        <th scope="row">{{ obj.id }}</th>
-        <td>{{ obj.title }}</td>
-        <td>{{ obj.category }}</td>
-        <td>{{ obj.filename }}</td>
-        <td>{{ obj.created_at }}</td>
+        <th scope="row">{{ video.id }}</th>
+        <td>{{ video.title }}</td>
+        <td>{{ video.category }}</td>
+        <td>{{ video.filename }}</td>
+        <td>{{ video.created_at }}</td>
         <td>
-          <a href="{% url 'video-update' obj.id %}"
+          <a href="{% url 'video-update' video.id %}"
             ><i class="fas fa-pen"></i></a
           >&nbsp;&nbsp;
-          <a href="{% url 'video-delete' obj.id %}"
+          <a href="{% url 'video-delete' video.id %}"
             ><i class="fas fa-trash-alt"></i></a
           >&nbsp;&nbsp;
-          <a href="{% url 'video-details' obj.id %}"
+          <a href="{% url 'video-details' video.id %}"
             ><i class="fas fa-eye"></i
           ></a>
         </td>

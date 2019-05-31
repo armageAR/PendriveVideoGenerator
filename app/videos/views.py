@@ -1,60 +1,46 @@
 from django.shortcuts import render, get_object_or_404, redirect
+
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import (
+    CreateView,
+    UpdateView,
+    DeleteView
+)
+
+
+from django.urls import reverse_lazy
+
 from .models import Video
 from .forms import VideoForm
 
 
-def video_list_view(request):
-    queryset = Video.objects.all()  # list of objects
-    context = {
-        "object_list": queryset
-    }
-    return render(request, "videos/list.html", context)
+class VideoList(ListView):
+    model = Video
+    template_name = 'videos/list.html'
+    # context_object_name =
 
 
-def video_create_view(request):
-    template = "videos/create.html"
-    if request.method == 'POST':
-        form = VideoForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('video-list')
-    else:
-        form = VideoForm()
-
-    context = {'form': form}
-    return render(request, template, context)
+class VideoDetail(DetailView):
+    model = Video
+    template_name = 'videos/details.html'
 
 
-def video_update_view(request, id=id):
-    template = "videos/create.html"
-    obj = get_object_or_404(Video, id=id)
+class VideoCreate(CreateView):
+    model = Video
+    success_url = reverse_lazy('video-list')
+    fields = ['title', 'category', 'videoFile']
+    template_name = "videos/create.html"
 
-    if request.method == 'POST':
-        form = VideoForm(request.POST, request.FILES, instance=obj)
-        if form.is_valid():
-            form.save()
-            return redirect('video-list')
-        else:
-            # form invalid
-            return redirect('video-list')
-    else:
-        form = VideoForm(None, instance=obj)
-    context = {'form': form}
-    return render(request, template, context)
 
-def video_delete_view(request, id):
-    obj = get_object_or_404(Video, id=id)
-    if request.method == "POST":
-        obj.delete()
-        return redirect('video-list')
-    context = {
-        "object": obj
-    }
-    return render(request, "videos/delete.html", context)
+class VideoUpdate(UpdateView):
+    model = Video
+    success_url = reverse_lazy('video-list')
+    fields = ['title', 'category', 'videoFile']
+    template_name = "videos/create.html"
 
-def video_detail_view(request, id):
-    obj = get_object_or_404(Video, id=id)
-    context = {
-        "object": obj
-    }
-    return render(request, "videos/details.html", context)
+
+class VideoDelete(DeleteView):
+    model = Video
+    success_url = reverse_lazy('video-list')
+    template_name = "videos/delete.html"
