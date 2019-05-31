@@ -41,3 +41,13 @@ def video_update_view(request, id=id):
         form = VideoForm(None, instance=obj)
     context = {'form': form}
     return render(request, template, context)
+
+def video_delete_view(request, id):
+    obj = get_object_or_404(Video, id=id)
+    if request.method == "POST":
+        obj.delete()
+        return redirect('video-list')
+    context = {
+        "object": obj
+    }
+    return render(request, "videos/delete.html", context)

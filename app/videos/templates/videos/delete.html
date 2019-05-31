@@ -1,0 +1,11 @@
+{% extends 'base.html' %} {% block content %}
+
+<form action="." method="POST">
+  {% csrf_token %}
+  <h1>Eliminar el video "{{ object.title }}"?</h1>
+  <p>
+    <input type="submit" value="Si" /> <a href="{% url 'video-list' %}">No</a>
+  </p>
+</form>
+
+{% endblock %}
