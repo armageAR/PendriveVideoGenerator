@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Video
 from .forms import VideoForm
 
@@ -12,11 +12,14 @@ def video_list_view(request):
 
 
 def video_create_view(request):
-    form = VideoForm(request.POST or None)
-    if form.is_valid():
-        form.save()
+    template = "videos/create.html"
+    if request.method == 'POST':
+        form = VideoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('video-list')
+    else:
         form = VideoForm()
-    context = {
-        'form': form
-    }
-    return render(request, "videos/create.html", context)
+
+    context = {'form': form}
+    return render(request, template, context)
