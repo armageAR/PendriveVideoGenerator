@@ -30,14 +30,14 @@ class VideoCreate(CreateView):
     model = Video
     success_url = reverse_lazy('video-list')
     fields = ['title', 'category', 'videoFile']
-    template_name = "videos/create.html"
+    template_name = "videos/form.html"
 
 
 class VideoUpdate(UpdateView):
     model = Video
     success_url = reverse_lazy('video-list')
     fields = ['title', 'category', 'videoFile']
-    template_name = "videos/create.html"
+    template_name = "videos/form.html"
 
 
 class VideoDelete(DeleteView):
