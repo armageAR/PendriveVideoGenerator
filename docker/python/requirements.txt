@@ -2,7 +2,7 @@ django>=2.2.1
 uwsgi==2.0.17.1
 mysqlclien==1.3.13
 django-debug-toolbar>=1.11
-pillow==5.2.0
+pillow==8.3.2
 django-redis>=4.5.0
 djangorestframework>=3.9.4
 bcrypt==3.1.6
